@@ -117,18 +117,30 @@ function getDistanceFromLatLonInKm (lat1, lon1, lat2, lon2) {
   return (RADIUS * c); // Distance in KM
 }
 
-function madElevate(theElevation) {
-  if (theElevation < 3) {
-    document.getElementById("madlib").insertAdjacentHTML('beforeEnd', 'Your elevation of ' + theElevation + ' is low. The likelihood that you will see flooding during the high tides is increased.');
+function madElevate (theElevation) {
+  let lowElevation     = theElevation < 3;
+  let averageElevation = theElevation < 8;
+  let highElevation    = theElevation >= 8;
+
+  function elevationLevel () {
+    if ( lowElevation )     return 'low';
+    if ( averageElevation ) return 'normal';
+    if ( highElevation )    return 'high for south Florida';
+    return 'unknown'
   }
 
-  else if (theElevation < 8) {
-    document.getElementById("madlib").insertAdjacentHTML('beforeEnd', 'Your elevation of ' + theElevation + ' indicates that the likelihood that you will see flooding during the high tides is average.');
+  function floodLevel () {
+    if ( lowElevation )     return 'increased';
+    if ( averageElevation ) return 'average';
+    if ( highElevation )    return 'decreased';
+    return 'unknown'
   }
 
-  else if (theElevation >= 8) {
-    document.getElementById("madlib").insertAdjacentHTML('beforeEnd', 'Your elevation of ' + theElevation + ' is high for south Florida and indicates that the likelihood that you will see flooding during the high tides is decreased.');
-  }
+  return 'Your elevation of '
+      + theElevation
+      + ' is ' + elevationLevel()
+      + '. The likelihood that you will see flooding during the high tides is ' + floodLevel() + '.';
+
 }
 
 function loadXMLDoc(mystation) {
@@ -156,7 +168,7 @@ function displayLocationElevation(location, elevator, infowindow) {
 
             document.getElementById("elevate").innerHTML = 'Your elevation is  ' + elevateme + ' feet.';
 
-            madElevate(elevateme);
+            document.querySelector("#madlib").insertAdjacentHTML('beforeEnd', madElevate(elevateme));
           }
         }
       }
