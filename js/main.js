@@ -101,21 +101,20 @@ function initMap() {
 }
 
 function getDistanceFromLatLonInKm (lat1, lon1, lat2, lon2) {
-  const Radius = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1);
-  var a =
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon/2) * Math.sin(dLon/2)
-  ;
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return Radius * c; // Distance in km
-  return d;
-}
+  const RADIUS = 6371; // Radius of the earth in km
 
-function deg2rad(deg) {
-  return deg * (Math.PI/180)
+  let deg2rad = function (deg) { return deg * (Math.PI / 180) };
+
+  const halfDegLat = deg2rad(lat2 - lat1) / 2;  // deg2rad below
+  const halfDegLon = deg2rad(lon2 - lon1) / 2;
+
+  let a = Math.sin( halfDegLat ) * Math.sin( halfDegLat ) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+      Math.sin( halfDegLon ) * Math.sin( halfDegLon );
+
+  let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+  return (RADIUS * c); // Distance in KM
 }
 
 function madElevate(theElevation) {
