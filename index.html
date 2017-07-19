@@ -18,61 +18,61 @@
 </head>
 
 <body>
-<div id="container">
-  <header>
-    <h1>Will it Flood?</h1>
-    <h4>Enter your address in the map. A calendar of high tides for the nearest NOAA tide monitoring station will appear. Dates in blue are at highest risk. Click or roll over to see time & depth.</h4>
-    <h5>By default, the highest high tides are greater than 2.8 feet. Change.</h5>
-    <form action="">
-      <!--TODO: Add Label for Input-->
-      <select id="kingme" name="kingchooser">
-        <option name="#" value="#">Make a Selection</option>
-        <option name="2.6" value="2.6"> 2.6 feet </option>
-        <option name="2.8" value="2.8"> 2.8 feet </option>
-        <option name="3.0" value="3.0"> 3.0 feet </option>
-        <option name="3.2" value="3.2"> 3.2 feet </option>
-        <option name="3.4" value="3.4"> 3.4 feet </option>
-        <option name="3.6" value="3.6"> 3.6 feet </option>
-        <option name="3.8" value="3.8"> 3.8 feet </option>
-        <option name="4.0" value="4.0"> 4.0 feet </option>
-        <option name="4.2" value="4.2"> 4.2 feet </option>
-        <option name="4.4" value="4.4"> 4.4 feet </option>
-        <option name="4.6" value="4.6"> 4.6 feet </option>
-        <option name="4.8" value="4.8"> 4.8 feet </option>
-        <option name="5.0" value="5.0"> 5.0 feet </option>
-      </select>
-      <input type="submit" />
-    </form>
-  </header>
-  <input id="pac-input" class="controls" placeholder="Enter your address">
-  <div id="map"></div>
-  <div id="infowindow-content">
-    <span id="place-name" class="title"></span>
-    <br>
-    Place ID <span id="place-id"></span>
-    <br>
-    <span id="place-address"></span>
+  <div id="container">
+    <header>
+      <h1>Will it Flood?</h1>
+      <h4>Enter your address in the map. A calendar of high tides for the nearest NOAA tide monitoring station will appear. Dates in blue are at highest risk. Click or roll over to see time & depth.</h4>
+      <h5>By default, the highest high tides are greater than 2.8 feet. Change.</h5>
+      <form action="">
+        <!--TODO: Add Label for Input-->
+        <select id="kingme" name="kingchooser">
+          <option name="#" value="#">Make a Selection</option>
+          <option name="2.6" value="2.6"> 2.6 feet </option>
+          <option name="2.8" value="2.8"> 2.8 feet </option>
+          <option name="3.0" value="3.0"> 3.0 feet </option>
+          <option name="3.2" value="3.2"> 3.2 feet </option>
+          <option name="3.4" value="3.4"> 3.4 feet </option>
+          <option name="3.6" value="3.6"> 3.6 feet </option>
+          <option name="3.8" value="3.8"> 3.8 feet </option>
+          <option name="4.0" value="4.0"> 4.0 feet </option>
+          <option name="4.2" value="4.2"> 4.2 feet </option>
+          <option name="4.4" value="4.4"> 4.4 feet </option>
+          <option name="4.6" value="4.6"> 4.6 feet </option>
+          <option name="4.8" value="4.8"> 4.8 feet </option>
+          <option name="5.0" value="5.0"> 5.0 feet </option>
+        </select>
+        <input type="submit" />
+      </form>
+    </header>
+    <input id="pac-input" class="controls" placeholder="Enter your address">
+    <div id="map"></div>
+    <div id="infowindow-content">
+      <span id="place-name" class="title"></span>
+      <br>
+      Place ID <span id="place-id"></span>
+      <br>
+      <span id="place-address"></span>
+    </div>
+    <div id="madlib"></div>
+    <div id="station"></div>
+    <div id="stationdist"></div>
+    <div id="elevate"></div>
+    <div id="jan"></div>
+    <div id="feb"></div>
+    <div id="mar"></div>
+    <div id="apr"></div>
+    <div id="may"></div>
+    <div id="jun"></div>
+    <div id="jul"></div>
+    <div id="aug"></div>
+    <div id="sep"></div>
+    <div id="oct"></div>
+    <div id="nov"></div>
+    <div id="dec"></div>
+    <footer>
+      <img src="images/carta.png" width="112" height="100" alt="CARTA-FIU"/>
+      <img src="images/cfm.png"   width="160" height="100" alt="CODE FOR MIAMI"/>
+    </footer>
   </div>
-  <div id="madlib"></div>
-  <div id="station"></div>
-  <div id="stationdist"></div>
-  <div id="elevate"></div>
-  <div id="jan"></div>
-  <div id="feb"></div>
-  <div id="mar"></div>
-  <div id="apr"></div>
-  <div id="may"></div>
-  <div id="jun"></div>
-  <div id="jul"></div>
-  <div id="aug"></div>
-  <div id="sep"></div>
-  <div id="oct"></div>
-  <div id="nov"></div>
-  <div id="dec"></div>
-  <footer>
-    <img src="images/carta.png" width="112" height="100" alt="CARTA-FIU"/>
-    <img src="images/cfm.png"   width="160" height="100" alt="CODE FOR MIAMI"/>
-  </footer>
-</div>
 </body>
 </html>
