@@ -512,7 +512,7 @@ function drawMonth(theMonth, monthtext, monthy) {
     var mlength = theMonth.length;
     console.log(theMonth);
     console.log(JSON.stringify(theMonth));
-    
+
     var z = 0;
 
     for (let i = 0; i < mlength; i = i + z) {
@@ -637,5 +637,5 @@ function drawMonth(theMonth, monthtext, monthy) {
             z = 3;
         }
     }
-    jsFunction();
+    addToolTip();
 }

@@ -90,7 +90,7 @@ function initMap() {
 
 }
 
-function jsFunction () {
+function addToolTip () {
   $('.masterTooltip')
       .hover(
           function () {
@@ -125,9 +125,9 @@ function getDistanceFromLatLonInKm (lat1, lon1, lat2, lon2) {
   const halfDegLat = deg2rad(lat2 - lat1) / 2;  // deg2rad below
   const halfDegLon = deg2rad(lon2 - lon1) / 2;
 
-  let a = Math.sin( halfDegLat ) * Math.sin( halfDegLat ) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-      Math.sin( halfDegLon ) * Math.sin( halfDegLon );
+  let a = Math.sin( halfDegLat )    * Math.sin( halfDegLat ) +
+          Math.cos( deg2rad(lat1) ) * Math.cos( deg2rad(lat2) ) *
+          Math.sin( halfDegLon )    * Math.sin( halfDegLon );
 
   let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 

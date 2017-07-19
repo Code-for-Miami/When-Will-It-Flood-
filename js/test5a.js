@@ -23,8 +23,8 @@ function loadArray(xml) {
     x = xmlDoc.getElementsByTagName("item");
     stationname = xmlDoc.getElementsByTagName("stationname")[0].childNodes[0].nodeValue;
   document.getElementById("station").innerHTML = stationname;
-  
-    for (i = 0; i < x.length; i = i + 1) { 
+
+    for (i = 0; i < x.length; i = i + 1) {
         dateme = new Date(x[i].getElementsByTagName("date")[0].childNodes[0].nodeValue);
         dayme = dateme.getDate();
         monthme = dateme.getMonth();
@@ -33,7 +33,7 @@ function loadArray(xml) {
         var daynew = dayme;
 
 if ((monthme === 0) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -59,7 +59,7 @@ if ((monthme === 0) && (monthme >= todayMonthNum)) {
         }
 
 if ((monthme === 1) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -85,7 +85,7 @@ if ((monthme === 1) && (monthme >= todayMonthNum)) {
         }
 
 if ((monthme === 2) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -111,7 +111,7 @@ if ((monthme === 2) && (monthme >= todayMonthNum)) {
         }
 
 if ((monthme === 3) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -136,7 +136,7 @@ if ((monthme === 3) && (monthme >= todayMonthNum)) {
             }
         }
 	       if ((monthme === 4) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -160,9 +160,9 @@ if ((monthme === 3) && (monthme >= todayMonthNum)) {
                 }
             }
         }
-	
+
 		       if ((monthme === 5) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -186,10 +186,10 @@ if ((monthme === 3) && (monthme >= todayMonthNum)) {
                 }
             }
         }
-	
-		
+
+
 		if ((monthme === 6) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -213,10 +213,10 @@ if ((monthme === 3) && (monthme >= todayMonthNum)) {
                 }
             }
         }
- 
-		
+
+
         if ((monthme === 7) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -241,7 +241,7 @@ if ((monthme === 3) && (monthme >= todayMonthNum)) {
             }
         }
         if ((monthme === 8) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -265,9 +265,9 @@ if ((monthme === 3) && (monthme >= todayMonthNum)) {
                 }
             }
         }
-        
+
         if ((monthme === 9) && (monthme >= todayMonthNum)) {
-            
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -292,7 +292,7 @@ if ((monthme === 3) && (monthme >= todayMonthNum)) {
             }
         }
         else if ((monthme === 10) && (monthme >= todayMonthNum)) {
-        
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -317,7 +317,7 @@ if ((monthme === 3) && (monthme >= todayMonthNum)) {
             }
         }
         else if ((monthme === 11) && (monthme >= todayMonthNum)) {
-        
+
             if (tidy.includes("H")) {
                 if (dayold === daynew) {
                     if (dayminder === 0) {
@@ -350,12 +350,12 @@ function loadUpTheMonths(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec) {
 		document.getElementById('jan').style.display = 'block';
 		drawMonth(jan, "January 2017", "jan");
 	}
-	
+
 	if (feb.length > 0) {
 		document.getElementById('feb').style.display = 'block';
 		drawMonth(feb, "February 2017", "feb");
 	}
-	
+
 	if (mar.length > 0) {
 		document.getElementById('mar').style.display = 'block';
 		drawMonth(mar, "March 2017", "mar");
@@ -402,13 +402,13 @@ function loadUpTheMonths(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec) {
 function drawMonth(theMonth, monthtext, monthy) {
     "use strict";
 	var isEmpty = document.getElementById(monthy).innerHTML === "";
-	
+
 
 	if (isEmpty === false) {
 		document.getElementById(monthy).innerHTML = '';
 	}
-	
-    document.getElementById(monthy).insertAdjacentHTML('beforeEnd', '<h2>'  +  monthtext + '</h2>'); 
+
+    document.getElementById(monthy).insertAdjacentHTML('beforeEnd', '<h2>'  +  monthtext + '</h2>');
 
     var mlength = theMonth.length;
     console.log(theMonth);
@@ -416,34 +416,34 @@ function drawMonth(theMonth, monthtext, monthy) {
     var king = 2.7;
     var z = 0;
     for (i = 0; i < mlength; i = i + z) { //loop the length of the array
-	
+
         if (theMonth[i + 2] >= king) { //if the depth of first is greater than king
-            if ((theMonth[i + 3]).length > 6 && theMonth[i + 4] < king)	{ 
-		//if there are 2 and the 2nd is less than king then do tide1 
+            if ((theMonth[i + 3]).length > 6 && theMonth[i + 4] < king)	{
+		//if there are 2 and the 2nd is less than king then do tide1
                 document.getElementById(monthy).insertAdjacentHTML('beforeEnd', '<div class="tide1"> <a href = "#" title ="'  + theMonth[i + 1] + ' ' + theMonth[i + 2] + 'ft' + ' & ' + theMonth[i + 3] + ' ' + theMonth[i + 4] + 'ft" class="masterTooltip"> <h3>' + theMonth[i] + '</h3> </a> </div>');
                 z = 5;
             }
-            
-            else if ((theMonth[i + 3]).length > 6 && (theMonth[i + 4] >= king)){ 
+
+            else if ((theMonth[i + 3]).length > 6 && (theMonth[i + 4] >= king)){
 	//if there are 2 and the 2nd is >king then do tide2
                 document.getElementById(monthy).insertAdjacentHTML('beforeEnd', '<div class="tide2"><a href = "#" title ="'  + theMonth[i + 1] + ' ' + theMonth[i + 2] + 'ft' + ' & ' + theMonth[i + 3] + ' ' + theMonth[i + 4] + 'ft" class="masterTooltip"><h3>' + theMonth[i] + '</h3> </a> </div>');
             z = 5;
-		} 
+		}
 		else {
-			//if only 1 then do tide1 
+			//if only 1 then do tide1
         document.getElementById(monthy).insertAdjacentHTML('beforeEnd', '<div class="tide1"><a href = "#" title ="'  + theMonth[i+1] + ' ' + theMonth[i+2] + 'ft" class="masterTooltip"> <h3>' + theMonth[i] + '</h3> </a> </div>');
 	z=3;
 	}
-	} 
-	
+	}
+
 	else if ((theMonth[i + 2] < king) && (theMonth[i + 3]).length > 6) {
 		//if there are 2 and the first is less than king
-        
-        if (theMonth[i + 4] >= king) {	
-		//if the second is greater than king do tide1		
+
+        if (theMonth[i + 4] >= king) {
+		//if the second is greater than king do tide1
             document.getElementById(monthy).insertAdjacentHTML('beforeEnd', '<div class="tide1"><a href = "#" title ="'  + theMonth[i + 1] + ' ' + theMonth[i + 2] + 'ft' + ' & ' + theMonth[i + 3] + ' ' + theMonth[i + 4] + 'ft" class="masterTooltip"><h3>' + theMonth[i] + '</h3> </a> </div>');
 		z=5;
-		} 
+		}
 		else if (theMonth[i + 4] < king) {
 			//if the seond is less than king do plain
                 document.getElementById(monthy).insertAdjacentHTML('beforeEnd', '<div class="plain"><a href = "#" title ="'  + theMonth[i + 1] + ' ' + theMonth[i + 2] + 'ft' + ' & ' + theMonth[i + 3] + ' ' + theMonth[i + 4] + 'ft" class="masterTooltip"><h3>' + theMonth[i] + '</h3> </div>');
@@ -454,10 +454,10 @@ function drawMonth(theMonth, monthtext, monthy) {
 		//otherwise do plain
                 document.getElementById(monthy).insertAdjacentHTML('beforeEnd', '<div class="plain"><a href = "#" title ="'  +  theMonth[i + 1] + ' ' + theMonth[i + 2] + ' ft" class="masterTooltip"><h3>' + theMonth[i] + '</h3></div>');
                 z = 3;
-            }	
-        
+            }
+
 	}
-	jsFunction();
+	addToolTip();
 }
 
 
