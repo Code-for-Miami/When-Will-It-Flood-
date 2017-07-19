@@ -1,9 +1,15 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <title>Will It Flood?</title>
   <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Will It Flood?</title>
+
   <link type="text/css" rel="stylesheet" href="css/appstyle2.css">
+
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script async defer type="text/javascript"
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoip0ve1aHbxpGyC7cQnV6qq7zLNGjAfU&libraries=places&callback=initMap"></script>
@@ -19,7 +25,7 @@
     <h5>By default, the highest high tides are greater than 2.8 feet. Change.</h5>
     <form action="">
       <!--TODO: Add Label for Input-->
-      <select name="kingchooser">
+      <select id="kingme" name="kingchooser">
         <option name="#" value="#">Make a Selection</option>
         <option name="2.6" value="2.6"> 2.6 feet </option>
         <option name="2.8" value="2.8"> 2.8 feet </option>
