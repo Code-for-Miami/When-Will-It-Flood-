@@ -167,11 +167,8 @@ function madElevate (theElevation) {
     return 'unknown'
   }
 
-  return 'Your elevation of '
-      + theElevation
-      + ' is ' + elevationLevel()
-      + '. The likelihood that you will see flooding during the high tides is ' + floodLevel() + '.';
-
+  return 'Your elevation of ' + theElevation  + ' is ' + elevationLevel() + '.'
+       + ' The likelihood that you will see flooding during the high tides is ' + floodLevel() + '.';
 }
 
 function loadXMLDoc(mystation) {
