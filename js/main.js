@@ -1,10 +1,21 @@
 $(document).ready(function () {
+  window.king = 1.0;
   $.get("tides/stations.json", function(stations) { window.lats = stations; });
 });
 
 function initMap() {
+
+  var selector = document.querySelector("#kingme");
+
+  selector.addEventListener('change', function (event) {
+    var value = event.target.value;
+    window.king = Number(value);
+    drawCalendar();
+  });
+
+
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 25.7823072, lng: -80.3010434},
+    center: { lat: 25.7823072, lng: -80.3010434 },
     zoom: 12
   });
   var input = document.getElementById('pac-input');
@@ -18,11 +29,13 @@ function initMap() {
   var marker = new google.maps.Marker({
     map: map
   });
-  marker.addListener('click', function() {
+  marker.addListener('click', function () {
     infowindow.open(map, marker);
   });
 
-  autocomplete.addListener('place_changed', function() {
+  autocomplete.addListener('place_changed', drawCalendar );
+
+  function drawCalendar() {
     infowindow.close();
     var place = autocomplete.getPlace();
     if (!place.geometry) {
@@ -49,31 +62,32 @@ function initMap() {
 
     displayLocationElevation(latLng, elevator, infowindow);
 
-    var best_dist=999999999;
+    var best_dist = 999999999;
     var best_stn = null;
-    for (i=0; i<lats.length; i++) {
-      var cur_stn=lats[i];
-      var cur_dist = getDistanceFromLatLonInKm(cur_stn[2],cur_stn[3],latitude,longitude);
+    for (i = 0; i < lats.length; i++) {
+      var cur_stn = lats[i];
+      var cur_dist = getDistanceFromLatLonInKm(cur_stn[2], cur_stn[3], latitude, longitude);
 
       if (Math.abs(cur_dist) < Math.abs(best_dist)) {
-        best_stn=cur_stn;
-        best_dist=Math.abs(cur_dist);
+        best_stn = cur_stn;
+        best_dist = Math.abs(cur_dist);
       }
     }
-    var miles =  (best_dist*0.62137).toPrecision(5);
+    var miles = (best_dist * 0.62137).toPrecision(5);
     document.getElementById("stationdist").innerHTML = 'Distance to station = ' + miles + ' miles.';
     if (miles > 2) {
-      document.getElementById("madlib").style.display="block";
-      document.getElementById("madlib").insertAdjacentHTML('beforeEnd','Your distance to the tide monitoring station is ' + miles + ' miles. The farther you are from the station, the longer it will take flooding from high tides, if any, to reach you.');
+      document.getElementById("madlib").style.display = "block";
+      document.getElementById("madlib").insertAdjacentHTML('beforeEnd', 'Your distance to the tide monitoring station is ' + miles + ' miles. The farther you are from the station, the longer it will take flooding from high tides, if any, to reach you.');
     }
     else if (miles <= 2) {
-      document.getElementById("madlib").style.display="block";
-      document.getElementById("madlib").insertAdjacentHTML('beforeEnd','Your distance to the tide monitoring station is ' + miles + ' miles. The closer you are to the station, the more likely you are to see flooding around the time of the high tides.');
+      document.getElementById("madlib").style.display = "block";
+      document.getElementById("madlib").insertAdjacentHTML('beforeEnd', 'Your distance to the tide monitoring station is ' + miles + ' miles. The closer you are to the station, the more likely you are to see flooding around the time of the high tides.');
     }
-    var passy= "tides/" + best_stn[1] + "_annual.xml";
+    var passy = "tides/" + best_stn[1] + "_annual.xml";
     loadXMLDoc(passy);
 
-  });
+  }
+
 }
 
 function jsFunction () {
