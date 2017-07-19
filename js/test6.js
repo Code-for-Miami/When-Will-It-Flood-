@@ -440,20 +440,7 @@ function loadArray(xml) {
     loadUpTheMonths(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
 }
 
-function loadUpTheMonths(
-    jan,
-    feb,
-    mar,
-    apr,
-    may,
-    jun,
-    jul,
-    aug,
-    sep,
-    oct,
-    nov,
-    dec
-) {
+function loadUpTheMonths( jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec) {
     if (jan.length > 0) {
         document.getElementById("jan").style.display = "block";
         drawMonth(jan, "January 2017", "jan");
@@ -524,7 +511,8 @@ function drawMonth(theMonth, monthtext, monthy) {
     console.log(JSON.stringify(theMonth));
     
     var z = 0;
-    for (i = 0; i < mlength; i = i + z) {
+
+    for (let i = 0; i < mlength; i = i + z) {
         //loop the length of the array
 
         if (theMonth[i + 2] >= king) {
