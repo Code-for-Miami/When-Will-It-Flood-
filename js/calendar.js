@@ -440,7 +440,10 @@ function loadArray(xml) {
     loadUpTheMonths(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
 }
 
-function loadUpTheMonths( jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec) {
+function loadUpTheMonths(
+    jan, feb, mar, apr, may, jun,
+    jul, aug, sep, oct, nov, dec
+) {
     if (jan.length > 0) {
         document.getElementById("jan").style.display = "block";
         drawMonth(jan, "January 2017", "jan");
