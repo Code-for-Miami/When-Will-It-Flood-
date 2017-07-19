@@ -117,21 +117,35 @@ function addToolTip () {
       );
 }
 
+/**
+ * This uses the ‘haversine’ formula to calculate the great-circle distance between two points – that is,
+ * the shortest distance over the earth’s surface – giving an ‘as-the-crow-flies’ distance between
+ * the points (ignoring any hills they fly over, of course!).
+ *
+ * @param {number} lat1 - Latitude of the first coordinate
+ * @param {number} lon1 - Longitude of the first coordinate
+ * @param {number} lat2 - Latitude of the second coordinate
+ * @param {number} lon2 - Longitude of the second coordinate
+ */
 function getDistanceFromLatLonInKm (lat1, lon1, lat2, lon2) {
-  const RADIUS = 6371; // Radius of the earth in km
+  const RADIUS_OF_EARTH = 6371;
 
-  let deg2rad = function (deg) { return deg * (Math.PI / 180) };
+  let degrees2radians = function (degrees) { return degrees * (Math.PI / 180) }; // Degrees to Radians
 
-  const halfDegLat = deg2rad(lat2 - lat1) / 2;  // deg2rad below
-  const halfDegLon = deg2rad(lon2 - lon1) / 2;
+  let firstLatRadians  = degrees2radians(lat1);
+  let secondLatRadians = degrees2radians(lat2);
+  let halfLatRadians   = degrees2radians(lat2 - lat1) / 2;  // Latitude to Radians Divided by 2
+  let halfLonRadians   = degrees2radians(lon2 - lon1) / 2;  // Longitude to Radians Divided by 2
 
-  let a = Math.sin( halfDegLat )    * Math.sin( halfDegLat ) +
-          Math.cos( deg2rad(lat1) ) * Math.cos( deg2rad(lat2) ) *
-          Math.sin( halfDegLon )    * Math.sin( halfDegLon );
+  // The square of half the chord length between the points
+  let lengthSquared = Math.sin(halfLatRadians)  * Math.sin(halfLatRadians) +
+                      Math.cos(firstLatRadians) * Math.cos(secondLatRadians) *
+                      Math.sin(halfLonRadians)  * Math.sin(halfLonRadians);
 
-  let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  // The angular distance in radians
+  let angular_distance_in_radians = 2 * Math.atan2(Math.sqrt(lengthSquared), Math.sqrt(1-lengthSquared));
 
-  return (RADIUS * c); // Distance in KM
+  return (RADIUS_OF_EARTH * angular_distance_in_radians); // Distance in KM
 }
 
 function madElevate (theElevation) {
