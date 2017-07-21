@@ -35,16 +35,15 @@ function initMap() {
 
   autocomplete.addListener('place_changed', drawCalendar );
 
-  function drawCalendar() {
+  function drawCalendar () {
     infowindow.close();
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      return;
-    }
 
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
+    var place = autocomplete.getPlace();
+
+    if (!place.geometry) return;
+
+    if (place.geometry.viewport) { map.fitBounds(place.geometry.viewport); }
+    else {
       map.setCenter(place.geometry.location);
       map.setZoom(17);
     }
@@ -64,7 +63,7 @@ function initMap() {
 
     var best_dist = 999999999;
     var best_stn = null;
-    for (i = 0; i < lats.length; i++) {
+    for (let i = 0; i < lats.length; i++) {
       var cur_stn = lats[i];
       var cur_dist = getDistanceFromLatLonInKm(cur_stn[2], cur_stn[3], latitude, longitude);
 
@@ -118,8 +117,9 @@ function addToolTip () {
 }
 
 /**
- * This uses the ‘haversine’ formula to calculate the great-circle distance between two points – that is,
- * the shortest distance over the earth’s surface – giving an ‘as-the-crow-flies’ distance between
+ * This uses the ‘haversine’ formula to calculate the great-circle distance
+ * between two points – that is, the shortest distance over the
+ * earth’s surface – giving an ‘as-the-crow-flies’ distance between
  * the points (ignoring any hills they fly over, of course!).
  *
  * @param {number} lat1 - Latitude of the first coordinate
@@ -148,6 +148,12 @@ function getDistanceFromLatLonInKm (lat1, lon1, lat2, lon2) {
   return (RADIUS_OF_EARTH * angular_distance_in_radians); // Distance in KM
 }
 
+/**
+ * Generates the elavation info madlib.
+ *
+ * @param {number} theElevation - The elevation in a location
+ */
+
 function madElevate (theElevation) {
   let lowElevation     = theElevation < 3;
   let averageElevation = theElevation < 8;
@@ -168,7 +174,8 @@ function madElevate (theElevation) {
   }
 
   return 'Your elevation of ' + theElevation  + ' is ' + elevationLevel() + '.'
-       + ' The likelihood that you will see flooding during the high tides is ' + floodLevel() + '.';
+       + ' The likelihood that you will see flooding during the high tides is '
+       + floodLevel() + '.';
 }
 
 function loadXMLDoc(mystation) {
