@@ -1,35 +1,40 @@
 # Will It Flood?
 
 ## What
-What is this and what is it for? Put a meaningful, short, plain-language description of what this project is trying to accomplish and why it matters. Describe the problem this project solves.
+This application lets residents of the state of Florida enter their address and view a calendar of dates for the highest high tides, known as the King Tides, in their area. Users may adjust the height of what they wish to identify as King Tides from 2.5 feet to 5.0 feet. The default is 2.5 feet.
 
 #### Status
-Is it done? Is it a prototype? Is it a zombie? Alpha, Beta, 1.1, etc. It's OK to write a sentence, too. The goal is to let interested people know where this project is at. This is also a good place to link to the [CHANGELOG](https://github.com/cfpb/ckan/blob/master/CHANGELOG.md).
+We are still working on the fucntionality. Our soft launch is September 2017, our official launch is October 12, 2017. [CHANGELOG](https://github.com/cfpb/ckan/blob/master/CHANGELOG.md).
 
 #### Screenshots
 ![Infinite Windmills](http://i.giphy.com/SIV3ijAwkNt9C.gif)
 
 #### Press
-Links to other people talking about your work.
+We do not have any press about this project yet, but an earlier FIU project developed in conjunction with Code for Miami has had a lot of press.
 
 ## Why
 A more in detail explanation for why this project exists. Tell us all about it.
 
 ## Who
-Who are you? Who are your partners? Links, logos, and lots of credit giving.
+This project is a collaboration of Florida International University's College of Communication, Architecture and the Arts and Code for Miami. Dr. Susan Jacobson, a professor in FIU's School of Communication & Journalism and a long-time member of Code for Miami, is the lead, but many members of Code for Miami have significantly contributed to this project, including:
+* Pablo Barria
+* Chris Scott
+* Bryce Kerley
+* Julie Kramer
+* Yamileth Medina
+* Ernie Hsuing
 
 ## How
 #### Dependencies
-Tell us what we need to know before we even begin with your project. Describe any dependencies that must be installed for this software to work. This includes programming languages, databases or other storage mechanisms, build tools, frameworks, and so forth. If specific versions of other software are required, or known not to work, call that out. Links to other [How To's](https://github.com/codeforamerica/howto) will help.
+This application draws upon data from annual tide predictions posted by NOAA: https://tidesandcurrents.noaa.gov/tide_predictions.html?gid=1397#listing. As of July 2017, we have data that goes through the end of the year. Links to other [How To's](https://github.com/codeforamerica/howto) will help.
 
 #### Install
-Detailed instructions on how to install, configure, and get the project running. This should be frequently tested to ensure reliability.
-
-Very clear instructions with 
-
-`line by line commands`
-
-`to copy and paste`
+You should install the following:
+* index.html
+* tides folder
+* css folder
+* js folder
+* images folder
 
 See [the CfAPI](https://github.com/codeforamerica/cfapi#installation) for an example.
 

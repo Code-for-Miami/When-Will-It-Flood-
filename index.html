@@ -5,28 +5,25 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
   <title>Will It Flood?</title>
-
-  <link type="text/css" rel="stylesheet" href="css/appstyle2.css">
-
+  <link type="text/css" rel="stylesheet" href="css/style.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script async defer type="text/javascript"
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoip0ve1aHbxpGyC7cQnV6qq7zLNGjAfU&libraries=places&callback=initMap"></script>
   <script type="text/javascript" src="js/calendar.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </head>
-
 <body>
   <div id="container">
     <header>
       <h1>Will it Flood?</h1>
       <h4>Enter your address in the map. A calendar of high tides for the nearest NOAA tide monitoring station will appear. Dates in blue are at highest risk. Click or roll over to see time & depth.</h4>
-      <h5>By default, the highest high tides are greater than 2.8 feet. Change.</h5>
+      
+      
       <form action="">
-        <!--TODO: Add Label for Input-->
+        <label>Highlight tides greater than </label>
         <select id="kingme" name="kingchooser">
-          <option name="#" value="#">Make a Selection</option>
+          <option name="2.5" value="2.5">2.5 feet</option>
           <option name="2.6" value="2.6"> 2.6 feet </option>
           <option name="2.8" value="2.8"> 2.8 feet </option>
           <option name="3.0" value="3.0"> 3.0 feet </option>
@@ -41,7 +38,6 @@
           <option name="4.8" value="4.8"> 4.8 feet </option>
           <option name="5.0" value="5.0"> 5.0 feet </option>
         </select>
-        <input type="submit" />
       </form>
     </header>
     <input id="pac-input" class="controls" placeholder="Enter your address">

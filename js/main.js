@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  window.king = 1.0;
+  window.king = 2.5;
   $.get("tides/stations.json", function(stations) { window.lats = stations; });
 });
 
