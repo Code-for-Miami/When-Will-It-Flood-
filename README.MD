@@ -6,9 +6,6 @@ This application lets residents of the state of Florida enter their address and 
 #### Status
 We are still working on the fucntionality. Our soft launch is September 2017, our official launch is October 12, 2017. [CHANGELOG](https://github.com/cfpb/ckan/blob/master/CHANGELOG.md).
 
-#### Screenshots
-![Infinite Windmills](http://i.giphy.com/SIV3ijAwkNt9C.gif)
-
 #### Press
 We do not have any press about this project yet, but an earlier FIU project developed in conjunction with Code for Miami has had a lot of press.
 
