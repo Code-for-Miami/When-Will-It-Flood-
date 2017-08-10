@@ -192,7 +192,7 @@ function getElevation (location, callback) {
     { locations: [location] }, function ( results, status ) {
       if (status === "OK" && results[0]) {
         let elevation = (3.28084 * results[0].elevation).toPrecision(2);
-        callback(elevation)
+        return callback(elevation)
       }
     }
   );
@@ -201,7 +201,7 @@ function getElevation (location, callback) {
 function loadStations() {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       window.lats = JSON.parse(this.response);
     }
   };
@@ -212,7 +212,7 @@ function loadStations() {
 function loadXMLDoc (mystation) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       loadArray(this);
     }
   };
