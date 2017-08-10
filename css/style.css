@@ -3,7 +3,7 @@
 html,
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 12pt;
+  font-size: 16px;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -15,8 +15,6 @@ header {
 
 h1 {
   color: #0020ff;
-  font-size: 4vw;
-  font-weight: bold;
 }
 
 h3 {
@@ -27,37 +25,50 @@ h3 {
   text-align: center;
 }
 
-h4 {
-  font-size: 1.5vw;
-}
-
-h5 {
-  font-size: 1vw;
-}
-
-#container {
+main {
   height: 100%;
   margin: 0;
 }
 
-#station {
-  font-size: 2.5vw;
-  font-weight: bold;
-  padding: 1%;
-  text-align: left;
+.container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
-#stationdist {
-  font-size: 1.5vw;
-  text-align: left;
-  padding: 1%;
-  margin-top: -2%;
+@media (min-width: 576px) {
+  .container {
+    width: 540px;
+    max-width: 100%;
+  }
 }
-#elevate {
-  font-size: 1.5vw;
+
+@media (min-width: 768px) {
+  .container {
+    width: 720px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 960px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1140px;
+    max-width: 100%;
+  }
+}
+
+#station {
+  font-weight: bold;
   text-align: left;
-  padding: 1%;
-  margin-top: -2%;
 }
 
 #jan,
@@ -84,18 +95,8 @@ h5 {
 }
 
 #madlib {
-  background-color: rgba(255, 255, 255, .60);
-  border: thin black solid;
-  width: 30%;
-  overflow: hidden;
-  padding: .5%;
-  margin-right: 1%;
-  margin-top: 1%;
   display: none;
-  z-index: 10;
-  position: absolute;
-  left: 50%;
-  top: 35%;
+  padding: 1%;
 }
 
 .tide1 {

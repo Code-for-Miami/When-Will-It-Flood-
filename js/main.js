@@ -186,10 +186,6 @@ function madComposer (elevation, distance) {
 
   madLibEl.style.display = "block";
   madLibEl.innerText = distanceText +' '+ elevationText;
-
-  document.getElementById("elevate").innerHTML =  "Your elevation is  " + elevation + " feet.";
-  document.getElementById("stationdist").innerHTML = "Distance to station = " + distance + " miles.";
-  document.getElementById("stationdist").innerHTML = "Distance to station = " + distance + " miles.";
 }
 
 function getElevation (location, callback) {
