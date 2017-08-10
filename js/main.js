@@ -49,7 +49,9 @@ function drawCalendar(map, place) {
   let       location = place.geometry.location;
   let closestStation = findClosestStation(lats, latitude, longitude);
   let stationDataUrl = "tides/" + closestStation.id + "_annual.xml";
-  let       distance = (closestStation.distance * 0.62137).toPrecision(2); // KM to Miles
+  let       distance = closestStation.distance.toPrecision(2);
+
+  console.dir(closestStation);
 
   if (!place.geometry) return;
 
@@ -74,15 +76,11 @@ function drawCalendar(map, place) {
  * @return {Number} The distance between the to points
  */
 function getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2) {
-  const RADIUS_OF_EARTH = 6371;
+  const RADIUS_OF_EARTH = 3959;
 
   let degrees2radians = function(degrees) {
     return degrees * (Math.PI / 180);
   }; // Degrees to Radians
-
-  function KmToMiles(km) {
-    return (km * 0.62137).toPrecision(2);
-  }
 
   let  firstLatRadians = degrees2radians(lat1);
   let secondLatRadians = degrees2radians(lat2);
@@ -101,7 +99,7 @@ function getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2) {
   let angular_distance_in_radians =
     2 * Math.atan2(Math.sqrt(lengthSquared), Math.sqrt(1 - lengthSquared));
 
-  return KmToMiles( RADIUS_OF_EARTH * angular_distance_in_radians ); // Distance in KM
+  return RADIUS_OF_EARTH * angular_distance_in_radians // Distance in KM
 }
 
 /**
@@ -117,7 +115,8 @@ function findClosestStation (stations, latitude, longitude) {
   return stations.map( (station) => {
     let distance = getDistanceFromLatLonInMiles(station[2], station[3], latitude, longitude);
     return {
-      id: station[1],
+      id: station[1], name: station[0],
+      lat: station[2], lng: station[3],
       distance: Number(distance)
     }
   }).sort(function (station1, station2) {
