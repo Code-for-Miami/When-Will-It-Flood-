@@ -1,105 +1,63 @@
 function initMap() {
   window.king = 2.6;
   loadStations();
-  var selector = document.querySelector("#kingme");
+  let     selector = document.querySelector("#kingme");
+  let        input = document.getElementById("pac-input");
+  let          map = new google.maps.Map(
+                       document.getElementById("map"), {
+                         center: { lat: 25.7823072, lng: -80.3010434 },
+                         zoom: 12
+                     });
+  let autocomplete = new google.maps.places.Autocomplete(input);
+  let       marker = new google.maps.Marker({ map: map });
 
-  selector.addEventListener("change", function(event) {
-    var value = event.target.value;
-    window.king = Number(value);
-    drawCalendar();
-  });
-
-  var map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 25.7823072, lng: -80.3010434 },
-    zoom: 12
-  });
-  var input = document.getElementById("pac-input");
-  var autocomplete = new google.maps.places.Autocomplete(input);
+  // Adds Places auto complete to Map
   autocomplete.bindTo("bounds", map);
+
+  // Positions Places auto complete to top left of map
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  var elevator = new google.maps.ElevationService();
-  var infowindow = new google.maps.InfoWindow();
-  var infowindowContent = document.getElementById("infowindow-content");
-  infowindow.setContent(infowindowContent);
-  var marker = new google.maps.Marker({
-    map: map
-  });
-  marker.addListener("click", function() {
-    infowindow.open(map, marker);
-  });
 
-  autocomplete.addListener("place_changed", drawCalendar);
-
-  function drawCalendar() {
-    infowindow.close();
-
-    var place = autocomplete.getPlace();
+  // Adds a Marker and Centers Map on Auto completed location
+  autocomplete.addListener("place_changed", function () {
+    let place = this.getPlace();
 
     if (!place.geometry) return;
+    if (place.geometry.viewport === undefined) map.setZoom(17);
 
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);
-    }
+    map.setCenter( place.geometry.location ); // Centers Map on location
+    map.fitBounds(place.geometry.viewport);
+    marker.setPosition( place.geometry.location ); // Moves Marker to Location
+  });
 
-    // Set the position of the marker using the place ID and location.
-    marker.setPlace({
-      placeId: place.place_id,
-      location: place.geometry.location
-    });
-    marker.setVisible(true);
+  // Runs Draw Calender on Auto Complete
+  autocomplete.addListener("place_changed", function () {
+    drawCalendar(map, this.getPlace())
+  });
 
-    var latitude = place.geometry.location.lat();
-    var longitude = place.geometry.location.lng();
-    var latLng = place.geometry.location;
+  // Refreshes Calender on Tide Level Limit Change
+  selector.addEventListener("change", function(event) {
+    let value = event.target.value;
+    window.king = Number(value);
+    drawCalendar(map);
+  });
 
-    displayLocationElevation(latLng, elevator, infowindow);
+}
 
-    var best_dist = 999999999;
-    var best_stn = null;
-    for (let i = 0; i < lats.length; i++) {
-      var cur_stn = lats[i];
-      var cur_dist = getDistanceFromLatLonInKm(
-        cur_stn[2],
-        cur_stn[3],
-        latitude,
-        longitude
-      );
+function drawCalendar(map, place) {
+  let       latitude = place.geometry.location.lat();
+  let      longitude = place.geometry.location.lng();
+  let       location = place.geometry.location;
+  let closestStation = findClosestStation(lats, latitude, longitude);
+  let stationDataUrl = "tides/" + closestStation.id + "_annual.xml";
+  let       distance = (closestStation.distance * 0.62137).toPrecision(2); // KM to Miles
 
-      if (Math.abs(cur_dist) < Math.abs(best_dist)) {
-        best_stn = cur_stn;
-        best_dist = Math.abs(cur_dist);
-      }
-    }
-    var miles = (best_dist * 0.62137).toPrecision(5);
-    document.getElementById("stationdist").innerHTML =
-      "Distance to station = " + miles + " miles.";
-    if (miles > 2) {
-      document.getElementById("madlib").style.display = "block";
-      document
-        .getElementById("madlib")
-        .insertAdjacentHTML(
-          "beforeEnd",
-          "Your distance to the tide monitoring station is " +
-            miles +
-            " miles. The farther you are from the station, the longer it will take flooding from high tides, if any, to reach you."
-        );
-    } else if (miles <= 2) {
-      document.getElementById("madlib").style.display = "block";
-      document
-        .getElementById("madlib")
-        .insertAdjacentHTML(
-          "beforeEnd",
-          "Your distance to the tide monitoring station is " +
-            miles +
-            " miles. The closer you are to the station, the more likely you are to see flooding around the time of the high tides."
-        );
-    }
-    var passy = "tides/" + best_stn[1] + "_annual.xml";
-    loadXMLDoc(passy);
-  }
+  if (!place.geometry) return;
+
+  getElevation(location, function (elevation) {
+    madComposer(elevation, distance)
+  });
+
+  loadXMLDoc(stationDataUrl);
 }
 
 /**
@@ -112,18 +70,24 @@ function initMap() {
  * @param {number} lon1 - Longitude of the first coordinate
  * @param {number} lat2 - Latitude of the second coordinate
  * @param {number} lon2 - Longitude of the second coordinate
+ *
+ * @return {Number} The distance between the to points
  */
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+function getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2) {
   const RADIUS_OF_EARTH = 6371;
 
   let degrees2radians = function(degrees) {
     return degrees * (Math.PI / 180);
   }; // Degrees to Radians
 
-  let firstLatRadians = degrees2radians(lat1);
+  function KmToMiles(km) {
+    return (km * 0.62137).toPrecision(2);
+  }
+
+  let  firstLatRadians = degrees2radians(lat1);
   let secondLatRadians = degrees2radians(lat2);
-  let halfLatRadians = degrees2radians(lat2 - lat1) / 2; // Latitude to Radians Divided by 2
-  let halfLonRadians = degrees2radians(lon2 - lon1) / 2; // Longitude to Radians Divided by 2
+  let   halfLatRadians = degrees2radians(lat2 - lat1) / 2; // Latitude to Radians Divided by 2
+  let   halfLonRadians = degrees2radians(lon2 - lon1) / 2; // Longitude to Radians Divided by 2
 
   // The square of half the chord length between the points
   let lengthSquared =
@@ -137,16 +101,36 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   let angular_distance_in_radians =
     2 * Math.atan2(Math.sqrt(lengthSquared), Math.sqrt(1 - lengthSquared));
 
-  return RADIUS_OF_EARTH * angular_distance_in_radians; // Distance in KM
+  return KmToMiles( RADIUS_OF_EARTH * angular_distance_in_radians ); // Distance in KM
 }
 
 /**
- * Generates the elavation info madlib.
+ * This calculates the distance to every station and then finds the closest one.
+ *
+ * @param {Array}  stations  - Array of Stations to search
+ * @param {Number} latitude  - Latitude of Location
+ * @param {Number} longitude - Longitude of Location
+ *
+ * @return {{ id: String, distance: Number }} Station
+ */
+function findClosestStation (stations, latitude, longitude) {
+  return stations.map( (station) => {
+    let distance = getDistanceFromLatLonInMiles(station[2], station[3], latitude, longitude);
+    return {
+      id: station[1],
+      distance: Number(distance)
+    }
+  }).sort(function (station1, station2) {
+    return station1.distance - station2.distance;
+  })[0];
+}
+
+/**
+ * Generates the elevation info madlib.
  *
  * @param {number} theElevation - The elevation in a location
  */
-
-function madElevate(theElevation) {
+function madElevate (theElevation) {
   let lowElevation = theElevation < 3;
   let averageElevation = theElevation < 8;
   let highElevation = theElevation >= 8;
@@ -154,7 +138,7 @@ function madElevate(theElevation) {
   function elevationLevel() {
     if (lowElevation) return "low";
     if (averageElevation) return "normal";
-    if (highElevation) return "high for south Florida";
+    if (highElevation) return "high for South Florida";
     return "unknown";
   }
 
@@ -177,6 +161,49 @@ function madElevate(theElevation) {
   );
 }
 
+/**
+ * Generates the distance info madlib.
+ *
+ * @param {number} distance - The distance in km to a station.
+ */
+function madDistance (distance) {
+
+  function proximityText (distance) {
+    if (distance > 2) return "The farther you are from the station, the longer it will take flooding from high tides, if any, to reach you.";
+    return "The closer you are to the station, the more likely you are to see flooding around the time of the high tides."
+  }
+
+  return (
+    "Your distance to the tide monitoring station is " + distance + " miles."
+    + proximityText(distance)
+  )
+
+}
+
+function madComposer (elevation, distance) {
+  let elevationText = madElevate(elevation);
+  let  distanceText = madDistance(distance);
+  let      madLibEl = document.getElementById("madlib");
+
+  madLibEl.style.display = "block";
+  madLibEl.innerText = distanceText +' '+ elevationText;
+
+  document.getElementById("elevate").innerHTML =  "Your elevation is  " + elevation + " feet.";
+  document.getElementById("stationdist").innerHTML = "Distance to station = " + distance + " miles.";
+  document.getElementById("stationdist").innerHTML = "Distance to station = " + distance + " miles.";
+}
+
+function getElevation (location, callback) {
+  let elevationService = new google.maps.ElevationService();
+  elevationService.getElevationForLocations(
+    { locations: [location] }, function ( results, status ) {
+      if (status === "OK" && results[0]) {
+        let elevation = (3.28084 * results[0].elevation).toPrecision(2);
+        callback(elevation)
+      }
+    }
+  );
+}
 
 function loadStations() {
   var xmlhttp = new XMLHttpRequest();
@@ -189,7 +216,7 @@ function loadStations() {
   xmlhttp.send();
 }
 
-function loadXMLDoc(mystation) {
+function loadXMLDoc (mystation) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -198,28 +225,4 @@ function loadXMLDoc(mystation) {
   };
   xmlhttp.open("GET", mystation, true);
   xmlhttp.send();
-}
-
-function displayLocationElevation(location, elevator, infowindow) {
-  // Initiate the location request
-  elevator.getElevationForLocations({ locations: [location] }, function(
-    results,
-    status
-  ) {
-    infowindow.setPosition(location);
-    if (status === "OK") {
-      // Retrieve the first result
-      if (results[0]) {
-        // Open the info window indicating the elevation at the clicked position.
-        var elevateme = (3.28084 * results[0].elevation).toPrecision(2);
-
-        document.getElementById("elevate").innerHTML =
-          "Your elevation is  " + elevateme + " feet.";
-
-        document
-          .querySelector("#madlib")
-          .insertAdjacentHTML("beforeEnd", madElevate(elevateme));
-      }
-    }
-  });
 }
