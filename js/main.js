@@ -1,4 +1,4 @@
-function initMap() {
+function initMap () {
   window.king = 2.6;
   loadStations();
   let     selector = document.querySelector("#kingme");
@@ -50,8 +50,6 @@ function drawCalendar(map, place) {
   let closestStation = findClosestStation(lats, latitude, longitude);
   let stationDataUrl = "tides/" + closestStation.id + "_annual.xml";
   let       distance = closestStation.distance.toPrecision(2);
-
-  console.dir(closestStation);
 
   if (!place.geometry) return;
 
