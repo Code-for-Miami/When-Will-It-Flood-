@@ -1,3 +1,5 @@
+DEPRECATED SEE [KING TIDE](https://codeclimate.com/github/Code-for-Miami/)
+
 # Will It Flood?
 [![Code Climate](https://codeclimate.com/github/Code-for-Miami/When-Will-It-Flood-/badges/gpa.svg)](https://codeclimate.com/github/Code-for-Miami/When-Will-It-Flood-) [![Issue Count](https://codeclimate.com/github/Code-for-Miami/When-Will-It-Flood-/badges/issue_count.svg)](https://codeclimate.com/github/Code-for-Miami/When-Will-It-Flood-)
 
