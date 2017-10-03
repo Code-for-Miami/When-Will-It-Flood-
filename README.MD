@@ -27,23 +27,20 @@ This project is a collaboration of Florida International University's College of
 ## MILESTONES
 Below are some of the events where we are planning on deploying these applications.
 
-•	Monday, Sept. 18 Training of community organizers to document King Tides, including water quality measurements, with Community Health Maps in Shorecrest, location TBD. 
-•	Tuesday, Sept. 19 – Community organizers go out to document flooding in Shorecrest. High tides is 9:25am - 2.94ft. They need video documentation of the water quality measurement and of the event.
-•	Wednesday, Sept. 20 -  Community organizers go out to document flooding in Shorecrest. High tides 10:11am - 2.97ft. They need video documentation of the water quality measurement and of the event.
+ - Monday, Sept. 18 Training of community organizers to document King Tides, including water quality measurements, with Community Health Maps in Shorecrest, location TBD. 
+ - Tuesday, Sept. 19 – Community organizers go out to document flooding in Shorecrest. High tides is 9:25am - 2.94ft. They need video documentation of the water quality measurement and of the event.
+ - Wednesday, Sept. 20 -  Community organizers go out to document flooding in Shorecrest. High tides 10:11am - 2.97ft. They need video documentation of the water quality measurement and of the event.
+ - Saturday, Oct. 7 -  Community organizers, who have trained citizens, lead citizens to document flooding in Shorecrest. High tides 10:11am - 2.97ft. They need video documentation of the water quality measurement. They need video documentation of the water quality measurement and of the event.
+ - Thursday, October 12 – CLIMA Show opens.
+ - Saturday, October 21 the CLIMA extravaganza, based in Pinecrest Gardens. Organize citizens to leave from Pinecrest Gardens to document King Tide flooding:
+   - Mattheson Hammock - 11:16am, 2.62ft
+   - Virginia Key - 10:27am, 2.78ft
+   - Shorecrest - 11:09am, 2.9ft
+   - Whole Foods, Alton Road - 10:14am, 3.4ft
+   - Sewell Park - 10:46am, 2.99ft
 
-•	Saturday, Oct. 7 -  Community organizers, who have trained citizens, lead citizens to document flooding in Shorecrest. High tides 10:11am - 2.97ft. They need video documentation of the water quality measurement. They need video documentation of the water quality measurement and of the event.
-
-•	Thursday, October 12 – CLIMA Show opens.
-
-•	Saturday, October 21 the CLIMA extravaganza, based in Pinecrest Gardens. Organize citizens to leave from Pinecrest Gardens to document King Tide flooding:
-o	Mattheson Hammock - 11:16am, 2.62ft
-o	Virginia Key - 10:27am, 2.78ft
-o	Shorecrest - 11:09am, 2.9ft
-o	Whole Foods, Alton Road - 10:14am, 3.4ft
-o	Sewell Park - 10:46am, 2.99ft
-
-•	Saturday, November 4 - Sea Level Solutions Day Extravaganza! The tides will be high.
-o	Government Cut - 9:21am, 3.36ft
+ - Saturday, November 4 - Sea Level Solutions Day Extravaganza! The tides will be high.
+   - Government Cut - 9:21am, 3.36ft
 
 ## How
 #### Dependencies
